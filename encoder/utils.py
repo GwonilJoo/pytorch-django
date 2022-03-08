@@ -1,6 +1,6 @@
-from cProfile import label
 import numpy as np
 import pandas as pd
+import pickle
 
 def find_dim(x):
     dim0 = np.size(x, axis=0)
@@ -41,3 +41,14 @@ def getWaferDataset(dataset):
                 image[w, i, j, int(data[w, i, j])] = 1
 
     return image, label
+
+if __name__ == "__main__":
+    dataset = '../dataset/LSWMD.pkl'
+
+    images, labels = getWaferDataset(dataset)
+    
+    with open('../dataset/origin_wafer.pkl', 'wb') as f:
+        pickle.dump(images, f)
+
+    with open('../dataset/origin_label.pkl', 'wb') as f:
+        pickle.dump(labels, f)
